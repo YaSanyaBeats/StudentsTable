@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
+        x:Class="StudentsTable.Views.About"
+        Title="About"
+		Width="450"
+		Height="450">
+
+	<Grid RowDefinitions="* *" ColumnDefinitions="*">
+		<TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">Ура, почти всё сделал, не прошло и 10 часов</TextBlock>
+		<TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Гончаров Александр ИП-017</TextBlock>
+	</Grid>
+</Window>

@@ -1,0 +1,143 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:StudentsTable.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			xmlns:model="using:StudentsTable.Models"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="StudentsTable.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="StudentsTable"
+		Width="800"
+		Height="450">
+
+	<Window.Styles>
+		<Style Selector="Button.button">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBlock.text">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="TextAlignment" Value="Center"/>
+		</Style>
+	</Window.Styles>
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Grid RowDefinitions="40 * 75" ColumnDefinitions="*">
+		<DockPanel Grid.Column="0" Grid.Row="0">
+			<Menu DockPanel.Dock="Top" VerticalAlignment="Top">
+				<MenuItem Header="File">
+					<MenuItem Name="SaveButton" Header="Save"/>
+					<MenuItem Name="LoadButton" Header="Load"/>
+					<MenuItem Name="ExitButton" Header="Exit"/>
+				</MenuItem>
+				<MenuItem Click="OpenAbout" Header="About"/>
+			</Menu>
+		</DockPanel>
+		<Grid Grid.Column="0" Grid.Row="1" ColumnDefinitions="*" RowDefinitions="* 40">
+			<DataGrid Name="MyDataGrid" Items="{Binding StudentCollection}" Grid.Column="0" Grid.Row="0">
+				<DataGrid.Columns>
+					<DataGridTemplateColumn Header="Name" Width="100">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Text="{Binding Name}"
+								VerticalAlignment="Center" HorizontalAlignment="Center" />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn.CellEditingTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBox Text="{Binding Name}" VerticalAlignment="Center"
+								HorizontalAlignment="Center" LostFocus="CellEdited"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellEditingTemplate>
+					</DataGridTemplateColumn>
+				
+					<DataGridTemplateColumn Header="Math" Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Background="{Binding Marks[0].Color}" Text="{Binding Marks[0].MarkStr}"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn.CellEditingTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBox Text="{Binding Marks[0].MarkStr}" VerticalAlignment="Center"
+								HorizontalAlignment="Center" LostFocus="CellEdited"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellEditingTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="IT" Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Background="{Binding Marks[1].Color}" Text="{Binding Marks[1].MarkStr}"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn.CellEditingTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBox Text="{Binding Marks[1].MarkStr}" VerticalAlignment="Center"
+								HorizontalAlignment="Center" LostFocus="CellEdited"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellEditingTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="Physics" Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Background="{Binding Marks[2].Color}" Text="{Binding Marks[2].MarkStr}"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn.CellEditingTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBox Text="{Binding Marks[2].MarkStr}" VerticalAlignment="Center"
+								HorizontalAlignment="Center" LostFocus="CellEdited"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellEditingTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="Visual" Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Background="{Binding Marks[3].Color}" Text="{Binding Marks[3].MarkStr}"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+						<DataGridTemplateColumn.CellEditingTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBox Text="{Binding Marks[3].MarkStr}" VerticalAlignment="Center"
+								HorizontalAlignment="Center" LostFocus="CellEdited"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellEditingTemplate>
+					</DataGridTemplateColumn>
+
+					<DataGridTemplateColumn Header="Average" Width="*">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate DataType="model:Student">
+								<TextBlock Classes="text" Background="{Binding AverageColor}" Text="{Binding Average}"/>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				
+					<DataGridCheckBoxColumn Binding="{Binding IsSelected}" Header="Check" Width="*"/>
+				</DataGrid.Columns>
+			</DataGrid>
+			<Grid ColumnDefinitions="100 * * * * * *" RowDefinitions="*" Grid.Column="0" Grid.Row="3">
+				<TextBlock Grid.Column="0" Grid.Row="0">Средний балл</TextBlock>
+				<TextBlock Classes="text" Grid.Column="1" Grid.Row="0" Background="{Binding AverageItemMarksCollection[0].Color}" Text="{Binding AverageItemMarksCollection[0].MarkStr}"></TextBlock>
+				<TextBlock Classes="text" Grid.Column="2" Grid.Row="0" Background="{Binding AverageItemMarksCollection[1].Color}" Text="{Binding AverageItemMarksCollection[1].MarkStr}"></TextBlock>
+				<TextBlock Classes="text" Grid.Column="3" Grid.Row="0" Background="{Binding AverageItemMarksCollection[2].Color}" Text="{Binding AverageItemMarksCollection[2].MarkStr}"></TextBlock>
+				<TextBlock Classes="text" Grid.Column="4" Grid.Row="0" Background="{Binding AverageItemMarksCollection[3].Color}" Text="{Binding AverageItemMarksCollection[3].MarkStr}"></TextBlock>
+			</Grid>
+		</Grid>
+
+		<Grid ColumnDefinitions="* *" RowDefinitions="*" Grid.Column="0" Grid.Row="3">
+			<Button Classes="button" Command="{Binding AddStudent}" Content="Добавить студента" Grid.Column="0"/>
+			<Button Classes="button" Command="{Binding RemoveStudent}" Content="Удалить выбранных" Grid.Column="1"/>
+		</Grid>
+	</Grid>
+	
+
+</Window>
